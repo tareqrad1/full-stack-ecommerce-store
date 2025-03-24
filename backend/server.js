@@ -1,10 +1,13 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import authRoute from './routes/auth.route.js';
-import connectDb from './config/conntctDb.config.js';
+dotenv.config();
+import connectDb from './config/connectDB.config.js';
+import { connectToCloudinary } from './config/connectCloudinary.config.js';
 import cookieParser from 'cookie-parser';
 
-dotenv.config();
+import authRoute from './routes/auth.route.js';
+import productRoute from './routes/product.route.js';
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -14,8 +17,10 @@ app.use(cookieParser());
 
 //routes
 app.use('/api/auth', authRoute);
+app.use('/api/products', productRoute);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${process.env.PORT} ✔`);
     connectDb();
+    connectToCloudinary();
 });
