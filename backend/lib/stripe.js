@@ -1,4 +1,5 @@
 import { stripe } from "../config/connectStripe.config.js";
+import Coupon from "../models/coupon.model.js";
 
 export async function createStripeCoupon(discountPercentage) {
     const coupon = await stripe.coupons.create({
