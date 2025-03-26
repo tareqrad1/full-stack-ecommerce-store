@@ -10,6 +10,7 @@ import productRoute from './routes/product.route.js';
 import cartRoute from './routes/cart.route.js'
 import couponRoute from './routes/coupon.route.js';
 import paymentRoute from './routes/payment.route.js';
+import analyticsRoute from './routes/analytic.route.js';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -24,6 +25,7 @@ app.use('/api/products', productRoute);
 app.use('/api/cart', cartRoute);
 app.use('/api/coupon', couponRoute);
 app.use('/api/payments', paymentRoute);
+app.use("/api/analytics", analyticsRoute);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${process.env.PORT} ✔`);
