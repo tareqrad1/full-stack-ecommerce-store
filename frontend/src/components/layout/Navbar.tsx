@@ -21,7 +21,7 @@ const Navbar: React.FC = () => {
         {/* Navbar */}
         <div className="flex justify-between items-center w-full h-[60px] px-[1.5rem] pt-[5px] bg-gray-900 border-b border-emerald-800">
             {/* Logo */}
-            <h1 className="text-xl text-emerald-400 font-bold cursor-pointer transition-transform duration-300 hover:scale-105">
+            <h1 className="text-xl text-emerald-400 font-bold cursor-pointer">
                 <Link to="/">E-Commerce</Link>
             </h1>
             {/* Desktop Menu */}

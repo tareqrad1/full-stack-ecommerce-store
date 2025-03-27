@@ -32,7 +32,7 @@ const SignupPage: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await signup({ ...formData });
+    await signup(formData.name, formData.email, formData.password, formData.confirmPassword);
     toast.success('User created successfully');
     setFormData({
       name: '',
@@ -82,7 +82,7 @@ const SignupPage: React.FC = () => {
           <div className="mb-4">
             <label htmlFor="password" className="block text-sm text-white font-medium">Password</label>
             <input
-              placeholder='*******'
+              placeholder='**********'
               type="password"
               id="password"
               name="password"
@@ -95,7 +95,7 @@ const SignupPage: React.FC = () => {
           <div className="mb-4">
             <label htmlFor="confirmPassword" className="block text-sm text-white font-medium">Confirm Password</label>
             <input
-              placeholder='*******'
+              placeholder='**********'
               type="password"
               id="confirmPassword"
               name="confirmPassword"

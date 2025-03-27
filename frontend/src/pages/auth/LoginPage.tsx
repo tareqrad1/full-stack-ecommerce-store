@@ -64,7 +64,7 @@ const SignupPage: React.FC = () => {
           <div className="mb-4">
             <label htmlFor="password" className="block text-sm text-white font-medium">Password</label>
             <input
-              placeholder='*******'
+              placeholder='**********'
               type="password"
               id="password"
               name="password"
