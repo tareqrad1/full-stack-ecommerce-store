@@ -89,7 +89,7 @@ export const refreshToken = async (req, res) => {
             sameSite: 'strict', //CSRF attacks
             maxAge: 15 * 60 * 1000
         });
-        return res.status(200).json({ message: 'Token refreshed successfully' });
+        return res.status(200).json({ message: 'Token refreshed successfully', accessToken });
     } catch (error) {
         console.log('error in refresh-token', error);
         res.status(500).json({ error: 'Server error occurred please try again later' });
