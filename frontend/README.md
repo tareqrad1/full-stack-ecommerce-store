@@ -1,54 +1,36 @@
-# React + TypeScript + Vite
+E-Commerce Store - MERN Stack with Stripe Payment
+Welcome to the E-Commerce Store project, a full-stack online store built using the MERN stack (MongoDB, Express.js, React, Node.js) and integrated with Stripe for secure payments.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Features
+User Authentication: Register, log in, and manage user sessions.
 
-Currently, two official plugins are available:
+Product Listings: Browse and filter a variety of products.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Shopping Cart: Add items to the cart and view details before checkout.
 
-## Expanding the ESLint configuration
+Stripe Integration: Secure payment processing with Stripe.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Admin Panel: Manage products, orders, and user data.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+Responsive Design: Fully responsive layout optimized for mobile and desktop devices.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Tech Stack
+Frontend: React.js, Redux, React Router, Tailwind CSS
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Backend: Node.js, Express.js
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+Database: MongoDB
+
+Authentication: JWT (JSON Web Tokens)
+
+Payment Gateway: Stripe
+
+Setup
+Prerequisites
+Ensure you have the following installed:
+
+Node.js
+
+npm or yarn
+
+MongoDB (either locally or via MongoDB Atlas)
