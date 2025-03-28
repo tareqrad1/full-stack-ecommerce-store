@@ -71,7 +71,6 @@ const SignupPage: React.FC = () => {
               value={formData.password}
               onChange={handleChange}
               className="w-full px-4 py-2 mt-2 bg-gray-700 border border-gray-600 rounded-md text-white"
-              required
             />
           </div>
           <p className='text-red-500 text-sm mt-2'>{error}</p>

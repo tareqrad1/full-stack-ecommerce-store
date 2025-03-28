@@ -3,10 +3,11 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../../store/useAuthStore";
 import toast from "react-hot-toast";
+import SvgLogo from "../svg/SVGLOGO";
 
-const Navbar: React.FC = () => {
+const Navbar: React.FC = (): React.JSX.Element => {
     const { user, logout } = useAuthStore();
-    const [menuOpen, setMenuOpen] = useState(false);
+    const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
     async function handleLogout() {
         await logout();
@@ -22,7 +23,7 @@ const Navbar: React.FC = () => {
         <div className="flex justify-between items-center w-full h-[60px] px-[1.5rem] pt-[5px] bg-gray-900 border-b border-emerald-800">
             {/* Logo */}
             <h1 className="text-xl text-emerald-400 font-bold cursor-pointer">
-                <Link to="/">E-Commerce</Link>
+                <Link to="/" className="flex items-center"><SvgLogo /></Link>
             </h1>
             {/* Desktop Menu */}
             <div className="hidden md:flex flex-1 justify-end">
@@ -30,7 +31,6 @@ const Navbar: React.FC = () => {
                 <li className="text-gray-300 cursor-pointer hover:text-white transition-all duration-200">
                 <Link to="/" >Home</Link>
                 </li>
-
                 {user ? (
                     <>
                         <li className="text-gray-300 cursor-pointer hover:text-white transition-all duration-200">
@@ -41,8 +41,8 @@ const Navbar: React.FC = () => {
                         {isAdmin && (
                         <li>
                             <Link
-                            to="/dashboard"
-                            className="relative flex items-center bg-emerald-700 hover:bg-emerald-600 transition-colors duration-300 delay-100 cursor-pointer text-white px-3 py-1 rounded"
+                            to="/secret-dashboard"
+                            className="relative flex items-center bg-emerald-700 hover:bg-emerald-600 transition-colors duration-300 delay-100 cursor-pointer text-white px-3 py-2 rounded"
                             >
                             <Lock className=' mr-1' size={18} />
                             Dashboard
@@ -50,8 +50,9 @@ const Navbar: React.FC = () => {
                         </li>
                         )}
                         <li onClick={handleLogout}>
-                            <button className="bg-gray-700 hover:bg-gray-600 cursor-pointer px-4 py-2 rounded-md transition-all duration-300">
+                            <button className="flex gap-1 text items-center bg-gray-700 hover:bg-gray-600 cursor-pointer px-3 py-2 rounded-md transition-all duration-300">
                                 <LogOut />
+                                <h1>Logout</h1>
                             </button>
                         </li>
                     </>
@@ -60,7 +61,7 @@ const Navbar: React.FC = () => {
                         <li>
                             <Link
                             to="/signup"
-                            className="relative flex items-center bg-emerald-700 hover:bg-emerald-600 transition-colors duration-300 delay-100 cursor-pointer text-white px-3 py-1 rounded text-sm"
+                            className="relative flex items-center bg-emerald-700 hover:bg-emerald-600 transition-colors duration-300 delay-100 cursor-pointer text-white px-3 py-2 rounded text-sm"
                             >
                             <UserRoundPlus className=' mr-1' size={18} />
                             Sign Up
@@ -69,7 +70,7 @@ const Navbar: React.FC = () => {
                         <li>
                             <Link
                             to="/login"
-                            className="relative text-sm  flex items-center bg-gray-700 hover:bg-gray-600 transition-colors duration-300 delay-100 cursor-pointer text-white px-3 py-1 rounded"
+                            className="relative text-sm  flex items-center bg-gray-700 hover:bg-gray-600 transition-colors duration-300 delay-100 cursor-pointer text-white px-3 py-2 rounded"
                             >
                             <LogIn className=' mr-1' size={18} />
                             Login
@@ -109,7 +110,7 @@ const Navbar: React.FC = () => {
                     {isAdmin && (
                         <li>
                         <Link
-                            to="/dashboard"
+                            to="/secret-dashboard"
                             className="bg-emerald-700 hover:bg-emerald-600 transition-colors duration-300 delay-100 cursor-pointer text-white px-3 py-1 rounded block"
                         >
                             Dashboard
@@ -117,7 +118,7 @@ const Navbar: React.FC = () => {
                         </li>
                     )}
                     <li onClick={handleLogout}>
-                        <button className="bg-gray-700 hover:bg-gray-600 cursor-pointer px-4 py-2 rounded-md w-full transition-all duration-300">
+                        <button className="bg-gray-700 hover:bg-gray-600 cursor-pointer px-3 py-2 rounded-md w-full transition-all duration-300">
                             <LogOut />
                         </button>
                     </li>

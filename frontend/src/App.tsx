@@ -8,9 +8,11 @@ import { Toaster } from 'react-hot-toast'
 import { useEffect, useRef } from 'react'
 import { useAuthStore } from './store/useAuthStore'
 import NotFoundPage from './pages/notFound/NotFound'
+import CategoryPage from './pages/home/CategoryPage'
+import AdminDashboard from './pages/home/AdminDashboard'
 
 const App = () => {
-  const { CheckAuth, user } = useAuthStore();
+  const { CheckAuth, user, isCheckingAuth } = useAuthStore();
   const isMounted = useRef<boolean>(true);
   useEffect(() => {
     if(isMounted.current) {
@@ -18,6 +20,11 @@ const App = () => {
       CheckAuth();
     };
   },[CheckAuth])
+  if(isCheckingAuth) {
+    return <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+            <div className="w-16 h-16 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
+          </div>
+  }
   return (
     <div className='bg-blue-50  dark:bg-gray-900 min-h-screen text-white relative overflow-hidden'> 
     <div className='absolute inset-0 overflow-hidden'>
@@ -33,6 +40,8 @@ const App = () => {
         <Route path='/signup' element={!user ? <SignupPage /> : <Navigate to={'/'} />} />
         <Route path='/login' element={!user ? <LoginPage /> : <Navigate to={'/'} />} />
         <Route path='/cart' element={!user ? <Navigate to={'/login'} /> : <CartPage />} />
+        <Route path='secret-dashboard' element={user?.role === 'admin' ? <AdminDashboard /> : <Navigate to={'/login'} />} />
+        <Route path='/category/:category' element={<CategoryPage />} />
       </Routes>
       <Toaster />
     </div>
