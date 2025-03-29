@@ -52,7 +52,7 @@ const Navbar: React.FC = (): React.JSX.Element => {
                         <li onClick={handleLogout}>
                             <button className="flex gap-1 text items-center bg-gray-700 hover:bg-gray-600 cursor-pointer px-3 py-2 rounded-md transition-all duration-300">
                                 <LogOut />
-                                <h1>Logout</h1>
+                                <h1>Signout</h1>
                             </button>
                         </li>
                     </>
@@ -111,14 +111,15 @@ const Navbar: React.FC = (): React.JSX.Element => {
                         <li>
                         <Link
                             to="/secret-dashboard"
-                            className="bg-emerald-700 hover:bg-emerald-600 transition-colors duration-300 delay-100 cursor-pointer text-white px-3 py-1 rounded block"
+                            className="flex justify-center items-center gap-1 bg-emerald-700 hover:bg-emerald-600 transition-colors duration-300 delay-100 cursor-pointer text-white px-3 py-1 rounded"
                         >
+                            <Lock className=' mr-1' size={18} />
                             Dashboard
                         </Link>
                         </li>
                     )}
                     <li onClick={handleLogout}>
-                        <button className="bg-gray-700 hover:bg-gray-600 cursor-pointer px-3 py-2 rounded-md w-full transition-all duration-300">
+                        <button className="flex justify-center items-center bg-gray-700 hover:bg-gray-600 cursor-pointer px-3 py-2 rounded-md w-full transition-all duration-300">
                             <LogOut />
                         </button>
                     </li>
