@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { motion } from 'framer-motion';
 import { BarChart, PlusCircle, ShoppingBasket } from 'lucide-react';
 import CreateProduct from '../../components/content/CreateProduct';
 import Products from '../../components/content/Products';
@@ -18,11 +17,7 @@ const AdminDashboard: React.FC = (): React.JSX.Element => {
   return (
     <div className='min-h-screen w-full overflow-hidden'>
         <div className='max-w-7xl mx-auto py-16 px-3'>
-            <motion.h1 className='text-center text-5xl capitalize text-emerald-400 font-bold'
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            >admin Dashboard</motion.h1>
+            <h1 className='text-center text-5xl capitalize text-emerald-400 font-bold'>admin Dashboard</h1>
             {/* toggle buttons */}
             <div className='flex justify-center  items-center gap-1 mt-6'>
                 {tabs.map((tab) => (

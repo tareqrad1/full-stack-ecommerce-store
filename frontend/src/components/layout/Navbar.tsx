@@ -50,9 +50,8 @@ const Navbar: React.FC = (): React.JSX.Element => {
                         </li>
                         )}
                         <li onClick={handleLogout}>
-                            <button className="flex gap-1 text items-center bg-gray-700 hover:bg-gray-600 cursor-pointer px-3 py-2 rounded-md transition-all duration-300">
+                            <button title="Logout" className="text items-center bg-gray-700 hover:bg-gray-600 cursor-pointer px-3 py-2 rounded-md transition-all duration-300">
                                 <LogOut />
-                                <h1>Signout</h1>
                             </button>
                         </li>
                     </>
