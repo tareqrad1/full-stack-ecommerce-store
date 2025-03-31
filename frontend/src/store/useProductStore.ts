@@ -3,7 +3,7 @@ import Axios from '../lib/axios';
 import axios from 'axios';
 
 
-type ProductsType = {
+export type ProductsType = {
     _id: string;
     name: string;
     description: string;
@@ -17,6 +17,7 @@ type ProductsType = {
 
 interface ProductsState {
     products: ProductsType[];
+    recommendations: ProductsType[];
     isLoading: boolean;
     error: string | null;
     createProduct: (name: string, description: string, price: number, category: string, image: string) => Promise<void>;
@@ -24,10 +25,12 @@ interface ProductsState {
     deleteProduct: (id: string) => Promise<void>;
     toggleFeaturedProduct: (id: string) => Promise<void>;
     getCategoryProducts: (category: string | undefined) => Promise<void>;
+    getRecommendationsProducts: () => Promise<void>;
 }
 
 export const useProductStore = create<ProductsState>((set) => ({
     products: [],
+    recommendations: [],
     isLoading: false,
     error: null,
 
@@ -112,6 +115,16 @@ export const useProductStore = create<ProductsState>((set) => ({
                 }
             }
             throw error;
+        }
+    },
+    getRecommendationsProducts: async () => {
+        set({ isLoading: true });
+        try {
+            const response = await Axios.get('/products/recommendations');
+            set({ isLoading: false, recommendations: response.data.products });
+        } catch (error: unknown) {
+            set({ isLoading: false });
+            console.log('error in getting recommendations products', error);
         }
     }
 }));

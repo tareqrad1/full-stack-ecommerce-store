@@ -9,12 +9,12 @@ type CategoryTypeProps = {
     }
 }
 
-const CategoryItems = ({ category }: CategoryTypeProps): React.JSX.Element => {
+const CategoryItems: React.FC<CategoryTypeProps> = ({ category }: CategoryTypeProps): React.JSX.Element => {
   return (
     <motion.div className='relative overflow-hidden rounded-sm'
     initial={{ opacity: 0, y: -10 }}
     animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.8 }} 
+    transition={{ duration: 0.8, delay: 0.2 }} 
     >
         <Link to={`/category${category.href}`}>
             <div className='h-96 z-10 relative hover:scale-105 transition duration-500 cursor-pointer shadow-md'>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Loader } from 'lucide-react';
+import { Loader, UserRoundPlus } from 'lucide-react';
 import { useAuthStore } from '../../store/useAuthStore';
 import toast from 'react-hot-toast';
 
@@ -20,6 +20,7 @@ const SignupPage: React.FC = () => {
     password: '',
     confirmPassword: '',
   });
+  const Navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => {
@@ -40,6 +41,7 @@ const SignupPage: React.FC = () => {
       password: '',
       confirmPassword: '',
     });
+    Navigate('/login');
   };
   const Loading: boolean = isLoading;
 
@@ -109,7 +111,7 @@ const SignupPage: React.FC = () => {
             type="submit"
             className="w-full bg-emerald-500 hover:bg-emerald-600 cursor-pointer text-white font-semibold py-2 rounded-md mt-4"
           >
-            {Loading ? <span className='flex justify-center text-gray-200'><Loader className='w-4 animate-spin mr-1' /></span> : 'Signup'}
+            {Loading ? <span className='flex justify-center text-gray-200'><Loader className='w-4 animate-spin mr-1' /></span> : <div className='flex justify-center items-center gap-1'><UserRoundPlus /> Signup</div>}
           </button>
         </form>
         <p className='mt-3 text-center'>don't have an account? <Link to="/login" className="text-emerald-400 hover:underline">Login</Link></p>

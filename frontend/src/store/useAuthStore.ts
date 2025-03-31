@@ -8,6 +8,7 @@ type UserType = {
     password: string;
     confirmPassword: string;
     role: string;
+    cartItems: string[];
 };
 interface AuthState {
     user: UserType | null;

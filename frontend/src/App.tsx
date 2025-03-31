@@ -10,16 +10,23 @@ import { useAuthStore } from './store/useAuthStore'
 import NotFoundPage from './pages/notFound/NotFound'
 import CategoryPage from './pages/home/CategoryPage'
 import AdminDashboard from './pages/home/AdminDashboard'
+import { useCartStore } from './store/useCartStore'
 
 const App = () => {
   const { CheckAuth, user, isCheckingAuth } = useAuthStore();
+  const { getCartItems } = useCartStore();
   const isMounted = useRef<boolean>(true);
   useEffect(() => {
     if(isMounted.current) {
       isMounted.current = false;
       CheckAuth();
     };
-  },[CheckAuth])
+  },[CheckAuth]);
+  useEffect(() => {
+    if(!user) return;
+    getCartItems()
+  },[getCartItems, user]);
+
   if(isCheckingAuth) {
     return <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
             <div className="w-16 h-16 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
@@ -42,6 +49,7 @@ const App = () => {
         <Route path='/cart' element={!user ? <Navigate to={'/login'} /> : <CartPage />} />
         <Route path='secret-dashboard' element={user?.role === 'admin' ? <AdminDashboard /> : <Navigate to={'/login'} />} />
         <Route path='/category/:category' element={<CategoryPage />} />
+        <Route path='/cart' element={!user ? <Navigate to={'/login'} /> : <CartPage />} />
       </Routes>
       <Toaster />
     </div>

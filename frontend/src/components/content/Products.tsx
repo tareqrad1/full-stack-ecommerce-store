@@ -17,7 +17,6 @@ const Products: React.FC = (): React.JSX.Element => {
       getAllProducts();
     }
   },[getAllProducts, toggleFeaturedProduct])
-  console.log(products, 'product all');
 
   if(isLoading) {
     return <SkeletonTable />
@@ -51,7 +50,7 @@ const Products: React.FC = (): React.JSX.Element => {
 
         {products.map((product) => (
           <tbody className="divide-y divide-gray-200 bg-gray-800" key={product._id}>
-          <tr className="*:first:font-medium *:text-[#ccc] hover:bg-gray-700">
+          <tr className="*:first:font-medium *:text-[#ccc] hover:bg-gray-700/20">
             <td className="px-3 py-2 whitespace-nowrap flex gap-3 items-center"><img src={product.image} alt={product.name} className='w-10 h-10 md:w-14 md:h-14 rounded-full object-fill' />{product.name}</td>
             <td className="px-3 py-2 whitespace-nowrap">{product.price}$</td>
             <td className="px-3 py-2 whitespace-nowrap">{product.category}</td>

@@ -4,9 +4,11 @@ import { Link } from "react-router-dom";
 import { useAuthStore } from "../../store/useAuthStore";
 import toast from "react-hot-toast";
 import SvgLogo from "../svg/SVGLOGO";
+import { useCartStore } from "../../store/useCartStore";
 
 const Navbar: React.FC = (): React.JSX.Element => {
     const { user, logout } = useAuthStore();
+    const { cart } = useCartStore();
     const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
     async function handleLogout() {
@@ -35,7 +37,7 @@ const Navbar: React.FC = (): React.JSX.Element => {
                     <>
                         <li className="text-gray-300 cursor-pointer hover:text-white transition-all duration-200">
                         <Link to="/cart" className="flex gap-1 relative">
-                            <LucideShoppingBasket /> cart <span className="absolute -left-[14px] -top-[10px] bg-emerald-700 rounded-full text-white text-sm w-5 h-5 flex justify-center items-center">5</span>
+                            <LucideShoppingBasket /> cart <span className={` ${cart.length > 0 ? 'block' : 'hidden'} absolute -left-[14px] -top-[10px] bg-emerald-700 rounded-full text-white text-sm w-5 h-5 flex justify-center items-center`}>{cart.length}</span>
                         </Link>
                         </li>
                         {isAdmin && (
@@ -103,7 +105,7 @@ const Navbar: React.FC = (): React.JSX.Element => {
                     </li>
                     <li className="text-gray-300 cursor-pointer hover:text-white transition-all duration-300">
                         <Link to="/cart" className="flex gap-1 justify-center relative">
-                            <LucideShoppingBasket /> cart <span className="absolute left-[38%] -top-[13px] bg-emerald-700 rounded-full text-white text-sm w-5 h-5 flex justify-center items-center">5</span>
+                            <LucideShoppingBasket /> cart <span className="absolute left-[38%] -top-[13px] bg-emerald-700 rounded-full text-white text-sm w-5 h-5 flex justify-center items-center">{cart.length}</span>
                         </Link>
                     </li>
                     {isAdmin && (
