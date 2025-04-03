@@ -60,7 +60,6 @@ const Products: React.FC = (): React.JSX.Element => {
             <td className="px-3 py-2 whitespace-nowrap"><Trash className='cursor-pointer text-red-400 hover:text-red-600 transition-colors' onClick={() => {
               deleteProduct(product._id)
               toast.success('Product deleted successfully', {id: product._id});
-              console.log(product.isFeatured, 'wow');
             }} /></td>
           </tr>
         </tbody>

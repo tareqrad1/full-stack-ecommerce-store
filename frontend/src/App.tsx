@@ -11,6 +11,8 @@ import NotFoundPage from './pages/notFound/NotFound'
 import CategoryPage from './pages/home/CategoryPage'
 import AdminDashboard from './pages/home/AdminDashboard'
 import { useCartStore } from './store/useCartStore'
+import PurchaseSuccess from './pages/purchase/PurchaseSuccess'
+import PurchaseCancelPage from './pages/purchase/PurcheseCancle'
 
 const App = () => {
   const { CheckAuth, user, isCheckingAuth } = useAuthStore();
@@ -50,6 +52,8 @@ const App = () => {
         <Route path='secret-dashboard' element={user?.role === 'admin' ? <AdminDashboard /> : <Navigate to={'/login'} />} />
         <Route path='/category/:category' element={<CategoryPage />} />
         <Route path='/cart' element={!user ? <Navigate to={'/login'} /> : <CartPage />} />
+        <Route path='/purchase-success' element={<PurchaseSuccess />} />
+        <Route path='/cancel-payment' element={<PurchaseCancelPage />} />
       </Routes>
       <Toaster />
     </div>

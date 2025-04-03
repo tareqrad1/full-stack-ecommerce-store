@@ -21,11 +21,16 @@ interface CartState {
     total: number;
     subTotal: number;
     coupon: null | CouponType;
+    isCouponApplied: boolean;
     getCartItems: () => Promise<void>;
     addToCart: (product: ProductsType ) => Promise<void>;
     calculateTotals: () => void;
     removeProductInCart: (id: string) => Promise<void>;
     updateQwtInCart: (id: string, qwt: number) => Promise<void>;
+    clearCart: () => Promise<void>;
+    applyCoupon: (code: string | undefined) => Promise<void>;
+    getCoupon: () => Promise<void>;
+    removeCoupon: () => void;
 }
 
 export const useCartStore = create<CartState>()(
@@ -34,6 +39,7 @@ export const useCartStore = create<CartState>()(
         total: 0,
         subTotal: 0,
         coupon: null,
+        isCouponApplied: false,
 
         getCartItems: async () => {
             try {
@@ -94,6 +100,38 @@ export const useCartStore = create<CartState>()(
             } catch (error: unknown) {
                 console.log('error in updating qwt in cart', error);
             }
+        },
+        clearCart: async () => {
+            try {
+                await Axios.delete('/cart');
+                set({ cart: [], coupon: null, total: 0, subTotal: 0 });
+                get().calculateTotals();
+            } catch (error: unknown) {
+                console.log('error in clearing cart', error);
+            }
+        },
+        getCoupon: async () => {
+            try {
+                const response = await Axios.get('/coupon/');
+                set({ coupon: response.data });
+            } catch (error: unknown) {
+                console.log('error in getting coupon', error);
+            }
+        },
+        applyCoupon: async (code: string | undefined) => {
+            try {
+                const response = await Axios.post('/coupon/validate-coupon', { code: code });
+                console.log(response.data, 'from apply coupon');
+                set({ coupon: response.data, isCouponApplied: true });
+                get().calculateTotals();
+            } catch (error: unknown) {
+                console.log('error in applying coupon', error);
+                
+            }
+        },
+        removeCoupon: () => {
+            set({ coupon: null, isCouponApplied: false });
+            get().calculateTotals();
         },
     }))
 );

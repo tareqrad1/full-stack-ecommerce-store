@@ -28,4 +28,4 @@ export const validateCoupon = async (req, res) => {
         console.log(error);
         res.status(500).json({ error: 'Server error occurred please try again later' });
     }
-}
+};

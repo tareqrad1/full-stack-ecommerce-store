@@ -9,27 +9,27 @@ export const createCheckoutSession = async (req, res) => {
         if(!Array.isArray(products) || products.length === 0) return res.status(400).json({ error: 'Invalid or empty product' });
         let totalAmount = 0; //save in cents
         const lineItems = products.map((product) => {
-            const amount = Math.round(product.price * 100); //because stripe need amount in cents
-            totalAmount += amount * product.quantity; 
+            const amount = product.price ? Math.round(Number(product.price) * 100) : 0; //return amount in cents
+            totalAmount += amount * (Number(product.qwt) || 1);
             
             return {
                 price_data: {
                     currency: 'usd',
                     product_data: {
                         name: product.name,
-                        image: [product.image],
-                        price: product.price,
-                    }
+                        images: [product.image], // ✅ Must be an array
+                    },
+                    unit_amount: product.price * 100, // thats mean stripe take value in cents
                 },
-                unit_amount: amount,
+                quantity: product.qwt || 1,
             }
         });
         
         let coupon = null;
         if(couponCode) {
             coupon = await Coupon.findOne({ code: couponCode, userId: req.user._id, isActive: true });
-            if(coupon !== null) {
-                totalAmount -= Math.round(totalAmount * coupon.discountPercentage / 100);
+            if (coupon && typeof coupon.discountPercentage === 'number') {
+                totalAmount -= Math.round(totalAmount * (coupon.discountPercentage / 100)); //in dollars $
             }
         }
         //create stripe session
@@ -37,28 +37,29 @@ export const createCheckoutSession = async (req, res) => {
             payment_method_types: ['card'],
             line_items: lineItems,
             mode: 'payment',
-            success_url: `${process.env.CLIENT_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
+            success_url: `${process.env.CLIENT_URL}/purchase-success?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${process.env.CLIENT_URL}/cancel-payment`,
             discounts: coupon ? [{
                 coupon: await createStripeCoupon(coupon.discountPercentage)
             }] : [],
             //add metadata to stripe
             metadata: {
-                userId: req.user?._id,
+                userId: req.user?._id.toString() || '',
                 couponCode: couponCode || '',
                 products: JSON.stringify(
                     products.map((product) => (
                         {
                             id: product._id,
-                            quantity: product.quantity,
-                            price: product.price
+                            quantity: product.qwt,
+                            price: product.price,
+                            name: product.name,
                         }
                     ))
                 )
             },
         });
         // add coupon to user he add +=200$ to his account
-        if(totalAmount >= 20000) {
+        if(totalAmount > 20000) {
             await createCouponCode(req.user._id);
         }
         res.status(200).json({ id: session.id, totalAmount: totalAmount / 100 }); //because stripe return amount in cents 200000cent => 200$
