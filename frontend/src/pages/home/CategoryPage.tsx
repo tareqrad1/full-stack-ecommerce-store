@@ -15,11 +15,11 @@ const CategoryPage: React.FC = (): React.JSX.Element => {
           <div className='max-w-7xl mx-auto px-4 py-2'>
           <h1 className='font-bold text-center text-6xl mb-9 text-emerald-400 capitalize'>{category}</h1>
             {products.length === 0 && <p className='text-center text-2xl font-bold mt-9'>No products found</p>}
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 space-y-3'>
             {products.map((prod) => (
-              <div key={prod._id} className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 space-y-3'>
                 <CardProducts key={prod._id} category={prod} />
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
     </>

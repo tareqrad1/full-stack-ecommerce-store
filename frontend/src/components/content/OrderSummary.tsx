@@ -45,7 +45,7 @@ const OrderSummary: React.FC = (): React.JSX.Element => {
 						{saving > 0 && (
 							<dl className='flex items-center justify-between gap-4'>
 								<dt className='text-base font-normal text-gray-300'>Savings</dt>
-								<dd className='text-base font-medium text-emerald-400'>-${saving}</dd>
+								<dd className='text-base font-medium text-emerald-400'>-${saving.toFixed(2)}</dd>
 							</dl>
 						)}
 

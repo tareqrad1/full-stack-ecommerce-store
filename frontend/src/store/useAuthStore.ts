@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import Axios from '../lib/axios';
+import axios from 'axios';
 
 type UserType = {
     name: string;
@@ -31,36 +32,44 @@ export const useAuthStore = create<AuthState>((set) => ({
     CheckAuth: async () => {
         set({ isCheckingAuth: true, error: null });
         try {
-        const response = await Axios.get('/auth/check-auth');
-        set({ isCheckingAuth: false, user: response.data.user, error: null });
+            const response = await Axios.get('/auth/check-auth');
+            set({ isCheckingAuth: false, user: response.data.user, error: null });
         } catch (error: unknown) {
-        console.log(error);
-        set({ isCheckingAuth: false, error: null });
+            console.log(error);
+            set({ isCheckingAuth: false, error: null });
         }
     },
 
     signup: async (name: string, email: string, password: string, confirmPassword: string) => {
         set({ isLoading: true, error: null });
         try {
-        const response = await Axios.post('/auth/signup', { name, email, password, confirmPassword });
-        set({ isLoading: false, error: null });
-        return response.data.user;
+            const response = await Axios.post('/auth/signup', { name, email, password, confirmPassword });
+            set({ isLoading: false, error: null });
+            return response.data.user;
         } catch (error: unknown) {
-        console.log(error);
-        set({ error: 'Error during signup', isLoading: false });
-        throw error;
+            if(axios.isAxiosError(error)) {
+                if(error instanceof Error) {
+                    console.log(error.message);
+                    set({ error: error.response?.data.error, isLoading: false });
+                }
+            }
+            throw error;
         }
     },
 
     login: async (email: string, password: string) => {
         set({ isLoading: true, error: null });
         try {
-        const response = await Axios.post('/auth/login', { email, password });
-        set({ isLoading: false, user: response.data.user, error: null });
+            const response = await Axios.post('/auth/login', { email, password });
+            set({ isLoading: false, user: response.data.user, error: null });
         } catch (error: unknown) {
-        console.log(error);
-        set({ error: 'Error during login', isLoading: false });
-        throw error;
+            if(axios.isAxiosError(error)) {
+                if(error instanceof Error) {
+                    console.log(error.message);
+                    set({ error: error.response?.data.error, isLoading: false });
+                }
+            }
+            throw error;
         }
     },
 
@@ -70,9 +79,13 @@ export const useAuthStore = create<AuthState>((set) => ({
         await Axios.post('/auth/logout');
         set({ isLoading: false, user: null, error: null });
         } catch (error: unknown) {
-        console.log(error);
-        set({ isLoading: false });
-        throw error;
+            if(axios.isAxiosError(error)) {
+                if(error instanceof Error) {
+                    console.log(error.message);
+                    set({ error: error.response?.data.error, isLoading: false });
+                }
+            }
+            throw error;
         }
     },
 
@@ -88,7 +101,7 @@ export const useAuthStore = create<AuthState>((set) => ({
                 ? {
                     ...state.user,
                     accessToken: newAccessToken,
-                    }
+                }
                 : null,
             }));
             console.log('Token refreshed successfully');

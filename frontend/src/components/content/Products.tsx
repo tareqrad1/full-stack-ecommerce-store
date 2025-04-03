@@ -48,8 +48,8 @@ const Products: React.FC = (): React.JSX.Element => {
             </tr>
         </thead>
 
-        {products.map((product) => (
-          <tbody className="divide-y divide-gray-200 bg-gray-800" key={product._id}>
+        {products.map((product, idx) => (
+          <tbody className="divide-y divide-gray-200 bg-gray-800" key={idx}>
           <tr className="*:first:font-medium *:text-[#ccc] hover:bg-gray-700/20">
             <td className="px-3 py-2 whitespace-nowrap flex gap-3 items-center"><img src={product.image} alt={product.name} className='w-10 h-10 md:w-14 md:h-14 rounded-full object-fill' />{product.name}</td>
             <td className="px-3 py-2 whitespace-nowrap">{product.price}$</td>

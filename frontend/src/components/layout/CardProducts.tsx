@@ -38,7 +38,7 @@ const CardProducts = ({category}: ProductTypes): React.JSX.Element => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
         >
-            <div className='space-y-5 border border-[#a8a4a464] rounded-md'>
+            <div className='space-y-5 max-w-[400px] border border-[#a8a4a464] rounded-md'>
                 <img src={category.image} alt={category.name} className='rounded-md object-cover opacity-80 h-96 w-full'/>
                 <div className='space-y-2 p-2'>
                     <h3 className='text-2xl capitalize'>{category.name}</h3>
