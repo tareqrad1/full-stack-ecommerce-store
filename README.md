@@ -32,7 +32,6 @@ Users can browse products, add to cart, manage orders, and make secure payments.
   <img src="https://webassets.mongodb.com/_com_assets/cms/mongodb_logo1-76twgcu2dm.png" alt="MongoDB" width="120"/>
   <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React" width="70"/>
   <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg" alt="TypeScript" width="70"/>
-  <img src="https://raw.githubusercontent.com/pmndrs/zustand/main/bear.svg" alt="Zustand" width="60"/>
 </div>
 
 ---
