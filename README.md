@@ -1,6 +1,6 @@
 # 🛒 Full Stack E-commerce Store
 
-A complete full-stack E-commerce platform built with modern technologies. The project includes a rich frontend using **React**, **Next.js**, **TypeScript**, and **Zustand**, along with a robust backend using **Node.js**, **Express**, and **MongoDB**.
+A complete full-stack E-commerce platform built with modern technologies. The project includes a rich frontend using **React**, **TypeScript**, and **Zustand**, along with a robust backend using **Node.js**, **Express**, and **MongoDB**.
 
 Users can browse products, add to cart, manage orders, and make secure payments. Admins can manage products and orders via a dedicated dashboard.
 
